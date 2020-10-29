@@ -11,6 +11,7 @@ namespace FluentDesignTest.Views
         public MainPage()
         {
             InitializeComponent();
+            SetTitle();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -27,5 +28,14 @@ namespace FluentDesignTest.Views
         }
 
         private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        private void SetTitle()
+        {
+            string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+            string title = "WelcomeTitle";
+            var txt = (TextBlock)FindName(title);
+            txt.Text = "Welcome, " + userName + "!";
+        }
     }
 }
